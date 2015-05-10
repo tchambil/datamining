@@ -1,3 +1,9 @@
+empleado <-function(directory, id=1:47, label =FALSE)
+{
+ tdato<-readspss(directory, id, label)
+ d<- tdato[tdato$p200g== 1958,]
+  return (d)
+}
 cleandata<- function(directory, id=1:47, label =FALSE)
 
   {
@@ -5,6 +11,7 @@ cleandata<- function(directory, id=1:47, label =FALSE)
               
            return(data)
   }
+
 
 readspss<-function(directory,id = 1:47, label=FALSE){
   library(foreign)
