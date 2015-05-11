@@ -15,23 +15,15 @@ empleado <-function(directory, id=1:47, label =FALSE)
  # Agrega nueva columna
  tdato <- data.frame(em = c(NA), tdato)
  for (i in 1:nrow(tdato)) {
-   if(!is.na(tdato[i, "p201"]==1)  
-      || !is.na(tdato[i, "p202"]==1) 
-      || !is.na(tdato[i, "p203"]==1)
-      || !is.na(tdato[i, "p2041"]==1)
-      || !is.na(tdato[i, "p2042"]==1)  
-      || !is.na(tdato[i, "p2043"]==1) 
-      || !is.na(tdato[i, "p2044"]==1)
-      || !is.na(tdato[i, "p2045"]==1)
-      || !is.na(tdato[i, "p2046"]==1)
-      || !is.na(tdato[i, "p2047"]==1)  
-      || !is.na(tdato[i, "p2048"]==1)
-      || !is.na(tdato[i, "p2049"]==1)
-      || !is.na(tdato[i, "p20410"]==1) )
-      {
-     tdato[i, "em"]<-1
-    
-    }
+    for(j in 15:27)
+    { if(!is.na(tdato[i, j])==TRUE)
+      {  
+        if(tdato[i, j]==1)
+        {
+          tdato[i, "em"]<-1
+        }
+      }
+    }    
    }
  ndato <- subset(tdato, em == 1)
 return (ndato)
