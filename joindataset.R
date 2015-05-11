@@ -15,12 +15,15 @@ empleado <-function(directory, id=1:47, label =FALSE)
  # Agrega nueva columna
  tdato <- data.frame(em = c(NA), tdato)
  for (i in 1:nrow(tdato)) {
-    for(j in 15:27)
-    { if(!is.na(tdato[i, j])==TRUE)
+   print(i) 
+   for(j in 15:27)
+    { 
+      if(!is.na(tdato[i, j])==TRUE)
       {  
         if(tdato[i, j]==1)
         {
           tdato[i, "em"]<-1
+          break
         }
       }
     }    
