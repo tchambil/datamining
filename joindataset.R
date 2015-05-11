@@ -1,9 +1,34 @@
 empleado <-function(directory, id=1:47, label =FALSE)
 {
  tdato<-readspss(directory, id, label)
- d<- tdato[tdato$p200g== 1958,]
-  return (d)
+ 
+ #d<- tdato[tdato$p2041== 1,]
+ #f<-subset(d,p2041==1 | p2042==1 )
+ # Agrega nueva columna
+ tdato <- data.frame(em = c(NA), tdato)
+ for (i in 1:nrow(tdato)) {
+   if(!is.na(tdato[i, "p201"]==1)  
+      || !is.na(tdato[i, "p202"]==1) 
+      || !is.na(tdato[i, "p203"]==1)
+      || !is.na(tdato[i, "p2041"]==1)
+      || !is.na(tdato[i, "p2042"]==1)  
+      || !is.na(tdato[i, "p2043"]==1) 
+      || !is.na(tdato[i, "p2044"]==1)
+      || !is.na(tdato[i, "p2045"]==1)
+      || !is.na(tdato[i, "p2046"]==1)
+      || !is.na(tdato[i, "p2047"]==1)  
+      || !is.na(tdato[i, "p2048"]==1)
+      || !is.na(tdato[i, "p2049"]==1)
+      || !is.na(tdato[i, "p20410"]==1) )
+      {
+     tdato[i, "em"]<-1
+        
+    }
+   }
+
+return (tdato)
 }
+
 cleandata<- function(directory, id=1:47, label =FALSE)
 
   {
