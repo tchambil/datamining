@@ -22,11 +22,11 @@ empleado <-function(directory, id=1:47, label =FALSE)
       || !is.na(tdato[i, "p20410"]==1) )
       {
      tdato[i, "em"]<-1
-        
+    
     }
    }
-
-return (tdato)
+ ndato <- subset(tdato, em == 1)
+return (ndato)
 }
 
 cleandata<- function(directory, id=1:47, label =FALSE)
