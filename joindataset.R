@@ -1,3 +1,11 @@
+
+ingresototal<-function(directory, id=1:47, label =FALSE)
+{
+  empleado<-empleado(directory, id, label)
+  itotal<-subset(empleado,ingtot>0)
+  return(itotal)
+}
+
 empleado <-function(directory, id=1:47, label =FALSE)
 {
  tdato<-readspss(directory, id, label)
