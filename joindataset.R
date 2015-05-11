@@ -1,4 +1,10 @@
-
+horatrabaja<-function(directory, id=1:47, label =FALSE)
+{
+  ingresototal<-ingresototal(directory, id, label)
+  htotal<-subset(ingresototal,p209t>35)
+  return(htotal)
+  
+}
 ingresototal<-function(directory, id=1:47, label =FALSE)
 {
   empleado<-empleado(directory, id, label)
