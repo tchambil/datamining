@@ -1,3 +1,31 @@
+
+data<-read.csv("MyData.csv")
+
+datanho<-subset(data, pano==2003)
+
+#Graficando promedios de horas trabajadas por dia
+GMedia<-function()
+{ da<-promediohoras()
+  barplot(da, main="Promedio de horas por dia", 
+          names.arg=c("Dom", "Lun", "Mar","Mie", "Jue","Vie","Sab"),
+          xlab="Dias de la semana",
+          ylab="Horas" )
+  par(new=TRUE)
+  abline(h = 7.6, col="red", lwd=1, lty=1)
+}
+#Obteniendo Promedio de Horas trabajadas por dia 
+promediohoras <- function()
+{
+ mediana<-c()#mediana de los dias de semana
+ x<-1
+ for (i in 37:43)
+ { 
+  mediana[x]<- mean((data)[[ i ]],na.rm = TRUE )
+  x<-x+1
+ }
+ return(mediana)
+}
+
 horatrabaja<-function(directory, id=1:47, label =FALSE)
 {
   ingresototal<-ingresototal(directory, id, label)
