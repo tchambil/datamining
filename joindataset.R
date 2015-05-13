@@ -1,36 +1,63 @@
 #El Archivo MyData.cvs contiene toda la data completa, importada desde spss
 #Lista para ser preporcesado
-
 data<-read.csv("MyData.csv")
+
 #El archivo dataempleado.cvs contiene data de empleados con ingresos mayores a 0 y sin NA
 dataempleado<-read.csv("dataempleado.csv")
+
+#Funcion para obtener empleados con ingresos mayores a 0
+ingresototal<-function()
+{
+  
+  empleado<-subset(data,!(is.na(data["ingtot"]) ))
+  itotal<-subset(empleado,ingtot>0)
+  return(itotal)
+}
+
+
+#Rellenar los NA en los atributos 
+#p202,p203, p2041,p2042,p2043
+#p2044,p2045,p2046,p2047,p2048    
+#p2049, p20410 
+ 
 
 #Funcion para preprar data para Weka (algoritmo arbol binario)
 dweka<-function()
 {
-  
-  dw <- subset(dataempleado, select = -c(pano,estrato, 
+  dataemp<-cleanempleado()
+  dwek <- subset(dataemp, select = -c(pano,estrato, 
                                          X,pmes,em,p104,p105,p106,p109b,p109c,
                                          p108,p207b,p209a,p209b,p209c,p209d,
                                          p209e,p209f,p209g,p209h,p209t,p210, 
                                          p213, p214, p215, p216,p217,p218,
                                          p219, p220,p208b1, p208b2,p209bb,
                                          p209cc,p209ee,ingprin) )
-  summary(dw)
-  View(dw)
-  return(dw)
+ 
+  dataeval<- dwek
+  for (i in 1:nrow(dataeval)) {
+    print(i) 
+    for(j in 6:17)
+    { 
+      if(!is.na(dataeval[i, j])==FALSE)
+      {   
+        dataeval[i, j]<-2
+      }
+    }    
+  }
+  
+  View(dataeval)
+  Summary(dataeva)
+  return(dataeval)
   
 }
-#Funcion para eliminar columnas que no tiene mucha relevancia en la data empleado 
+#Funcion para eliminar NA's de los que no tiene mucha relevancia en la data empleado 
 cleanempleado<-function()
 {
-  #eliminando p200g en dataframe empleado 
   dataempleado<-subset(dataempleado,!(is.na(dataempleado["p200g"]) ))
   dataempleado<-subset(dataempleado,!(is.na(dataempleado["p208b3"]) ))
   dataempleado<-subset(dataempleado,!(is.na(dataempleado["p212e"]) ))
- 
-  
-  return(empleado)
+ return(dataempleado)
+   
 }
 #Funcion para entiquetar empledos con subempleo
 subempleado <-function()
