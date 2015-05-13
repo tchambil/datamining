@@ -1,7 +1,43 @@
 
 data<-read.csv("MyData.csv")
+dataempleado<-read.csv("dataempleado.cvs")
 
-datanho<-subset(data, pano==2003)
+subempleado <-function()
+{ #install.packages("tm")
+  library(tm)
+  semp <- data.frame(sem = c(NA), data)
+  for (i in 1:nrow(semp)) 
+    {
+      if(!is.na(semp[i, "p209t"])==TRUE)
+      {  print(i)
+        if(semp[i, "p209t"]>=35 & semp[i, "ingtot"]<850)
+        {
+          semp[i, "sem"]<-1
+        
+        }
+        else
+        {
+          semp[i, "sem"]<-0 
+        }
+      }
+         
+  }
+  return (semp)
+}
+
+
+histhora <- function(anho)
+{
+  adato<-subset(data, pano==anho)
+  dt<-adato[[ "p209t" ]]
+  
+  hist(dt, breaks=seq(from=0,to=120,by=4), prob=TRUE,col="grey",
+  border="blue",
+  xlab="Hora semana",
+  ylab="Cantidad",main="Horas trabajadas durante la semana")
+  #lines(density(dt), col = "red")
+}
+
 
 #Graficando promedios de horas trabajadas por dia
 GMedia<-function()
@@ -25,28 +61,18 @@ promediohoras <- function()
  }
  return(mediana)
 }
-
-horatrabaja<-function(directory, id=1:47, label =FALSE)
+ 
+ingresototal<-function()
 {
-  ingresototal<-ingresototal(directory, id, label)
-  htotal<-subset(ingresototal,p209t>35)
-  return(htotal)
-  
-}
-ingresototal<-function(directory, id=1:47, label =FALSE)
-{
-  empleado<-empleado(directory, id, label)
+ 
+  empleado<-subset(data,!(is.na(data["ingtot"]) ))
   itotal<-subset(empleado,ingtot>0)
   return(itotal)
 }
-
+#87500
 empleado <-function(directory, id=1:47, label =FALSE)
 {
  tdato<-readspss(directory, id, label)
- 
- #d<- tdato[tdato$p2041== 1,]
- #f<-subset(d,p2041==1 | p2042==1 )
- # Agrega nueva columna
  tdato <- data.frame(em = c(NA), tdato)
  for (i in 1:nrow(tdato)) {
    print(i) 
@@ -66,15 +92,6 @@ empleado <-function(directory, id=1:47, label =FALSE)
 return (ndato)
 }
 
-cleandata<- function(directory, id=1:47, label =FALSE)
-
-  {
-            data<-readspss(directory, id, label)
-              
-           return(data)
-  }
-
-
 readspss<-function(directory,id = 1:47, label=FALSE){
   library(foreign)
   for (cid in id) 
@@ -92,8 +109,6 @@ readspss<-function(directory,id = 1:47, label=FALSE){
     }      
   } 
   data<-dataframe
-  #fileout <- paste(directory, "/", directory ,sep = "")
-  #write.table(dataframe, paste(fileout, ".csv",sep=""), sep=",")
   return (data) 
 }
 getdir <- function(id, directory,label) {
@@ -105,4 +120,4 @@ getdir <- function(id, directory,label) {
   return(rawDfr)
 }
 
-# MyData <- read.csv("2003.csv", header=TRUE, sep=",")  
+# MyData <- read.csv("2003.csv", header=TRUE, sep=",") 
