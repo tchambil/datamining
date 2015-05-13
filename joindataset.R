@@ -47,9 +47,6 @@ dweka<-function()
       }
     }    
   }
-  
-  View(dataeval)
-  Summary(dataeva)
   return(dataeval)
   
 }
@@ -73,12 +70,12 @@ subempleado <-function()
       {  print(i)
         if(semp[i, "p209t"]>=35 & semp[i, "ingtot"]<850)
         {
-          semp[i, "sem"]<-1
+          semp[i, "sem"]<-"Subempleado"
         
         }
         else
         {
-          semp[i, "sem"]<-0 
+          semp[i, "sem"]<-"NoSubempleado" 
         }
       }
          
