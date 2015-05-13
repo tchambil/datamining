@@ -1,6 +1,31 @@
 
 data<-read.csv("MyData.csv")
-dataempleado<-read.csv("dataempleado.cvs")
+dataempleado<-read.csv("dataempleado.csv")
+
+dweka<-function()
+{
+   
+  dw <- subset(dataempleado, select = -c(pano,estrato, 
+                                         X,pmes,em,p104,p105,p106,p109b,p109c,
+                                         p108,p207b,p209a,p209b,p209c,p209d,
+                                         p209e,p209f,p209g,p209h,p209t,p210, 
+                                         p213, p214, p215, p216,p217,p218,
+                                         p219, p220,p208b1, p208b2,p209bb,
+                                         p209cc,p209ee,ingprin) )
+  summary(dw)
+  View(dw)
+  
+}
+cleanempleado<-function()
+{
+  #eliminando p200g en dataframe empleado 
+  dataempleado<-subset(dataempleado,!(is.na(dataempleado["p200g"]) ))
+  dataempleado<-subset(dataempleado,!(is.na(dataempleado["p208b3"]) ))
+  dataempleado<-subset(dataempleado,!(is.na(dataempleado["p212e"]) ))
+ 
+  
+  return(empleado)
+}
 
 subempleado <-function()
 { #install.packages("tm")
