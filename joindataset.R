@@ -1,10 +1,14 @@
+#El Archivo MyData.cvs contiene toda la data completa, importada desde spss
+#Lista para ser preporcesado
 
 data<-read.csv("MyData.csv")
+#El archivo dataempleado.cvs contiene data de empleados con ingresos mayores a 0 y sin NA
 dataempleado<-read.csv("dataempleado.csv")
 
+#Funcion para preprar data para Weka (algoritmo arbol binario)
 dweka<-function()
 {
-   
+  
   dw <- subset(dataempleado, select = -c(pano,estrato, 
                                          X,pmes,em,p104,p105,p106,p109b,p109c,
                                          p108,p207b,p209a,p209b,p209c,p209d,
@@ -14,8 +18,10 @@ dweka<-function()
                                          p209cc,p209ee,ingprin) )
   summary(dw)
   View(dw)
+  return(dw)
   
 }
+#Funcion para eliminar columnas que no tiene mucha relevancia en la data empleado 
 cleanempleado<-function()
 {
   #eliminando p200g en dataframe empleado 
@@ -26,7 +32,7 @@ cleanempleado<-function()
   
   return(empleado)
 }
-
+#Funcion para entiquetar empledos con subempleo
 subempleado <-function()
 { #install.packages("tm")
   library(tm)
@@ -50,7 +56,7 @@ subempleado <-function()
   return (semp)
 }
 
-
+#Funcion para graficar horas trabajas durante la semana
 histhora <- function(anho)
 {
   adato<-subset(data, pano==anho)
@@ -86,7 +92,7 @@ promediohoras <- function()
  }
  return(mediana)
 }
- 
+ #Funcion para obtener empleados con ingresos mayores a 0
 ingresototal<-function()
 {
  
@@ -94,7 +100,7 @@ ingresototal<-function()
   itotal<-subset(empleado,ingtot>0)
   return(itotal)
 }
-#87500
+#Funcion para etiquetar como empleado
 empleado <-function(directory, id=1:47, label =FALSE)
 {
  tdato<-readspss(directory, id, label)
@@ -116,7 +122,7 @@ empleado <-function(directory, id=1:47, label =FALSE)
  ndato <- subset(tdato, em == 1)
 return (ndato)
 }
-
+#Funcion para construir la data desde archivos(47) spss
 readspss<-function(directory,id = 1:47, label=FALSE){
   library(foreign)
   for (cid in id) 
@@ -136,6 +142,8 @@ readspss<-function(directory,id = 1:47, label=FALSE){
   data<-dataframe
   return (data) 
 }
+#Funcion para obtener ubicacion de archivos
+
 getdir <- function(id, directory,label) {
   fileStr <- paste(directory, "/", sprintf("%01d", as.numeric(id)), ".sav", 
                    sep = "")
