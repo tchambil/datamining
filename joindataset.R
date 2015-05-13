@@ -15,10 +15,7 @@ ingresototal<-function()
 }
 
 
-#Rellenar los NA en los atributos 
-#p202,p203, p2041,p2042,p2043
-#p2044,p2045,p2046,p2047,p2048    
-#p2049, p20410 
+
  
 
 #Funcion para preprar data para Weka (algoritmo arbol binario)
@@ -34,6 +31,12 @@ dweka<-function()
                                          p209cc,p209ee,ingprin) )
  
   dataeval<- dwek
+  
+  #Loop Rellenar los NA en los atributos 
+  #p202,p203, p2041,p2042,p2043
+  #p2044,p2045,p2046,p2047,p2048    
+  #p2049, p20410 
+  
   for (i in 1:nrow(dataeval)) {
     print(i) 
     for(j in 6:17)
