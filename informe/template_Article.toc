@@ -1,7 +1,0 @@
-\beamer@endinputifotherversion {3.36pt}
-\select@language {spanish}
-\beamer@sectionintoc {1}{Introducci\'on}{2}{0}{1}
-\beamer@sectionintoc {2}{Motivaci\'on}{2}{0}{2}
-\beamer@sectionintoc {3}{Definici\'on del Problema}{2}{0}{3}
-\beamer@sectionintoc {4}{Objetivos}{2}{0}{4}
-\beamer@sectionintoc {5}{Descripci\'on del dataset de la Encuesta permanente de Empleado}{3}{0}{5}
